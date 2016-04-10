@@ -6,6 +6,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.OnItemTouchListener;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +49,7 @@ public class NavigationDrawer extends Fragment {
 
         List<Data> data = new ArrayList<>();
 
-        String[] titles = {"Hello 1","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1"};
+        String[] titles = {"Hello 1","Set Goal","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1"};
         int[] images = {R.drawable.a,R.drawable.a,R.drawable.a,R.drawable.a,R.drawable.a,R.drawable.a,R.drawable.a,R.drawable.a,R.drawable.a,R.drawable.a};
 
         for (int i = 0; i < titles.length && i < images.length;i++){
@@ -98,4 +99,6 @@ public class NavigationDrawer extends Fragment {
             }
         });
     }
+
+
 }
