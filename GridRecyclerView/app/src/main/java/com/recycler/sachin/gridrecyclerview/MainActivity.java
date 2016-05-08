@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import com.recycler.sachin.gridrecyclerview.helper.GetterSetter;
-
 import java.util.ArrayList;
 import java.util.List;
 
