@@ -7,6 +7,6 @@ package com.recycler.sachin.gridrecyclerview.helper;
  */
 public class GetterSetter {
 
-    public int id;
+    public String id;
     public String title;
 }
