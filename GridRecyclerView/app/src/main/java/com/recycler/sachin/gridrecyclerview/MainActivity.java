@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         List<GetterSetter> list = new ArrayList<>();
 
         String[] titles = {"Hello 1","Set Goal","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1","Hello 1"};
-        int[] images = {R.mipmap.home,R.mipmap.home,R.mipmap.home,R.mipmap.home,R.mipmap.home,R.mipmap.home,R.mipmap.home,R.mipmap.home,R.mipmap.home,R.mipmap.home};
+        String[] images = {"http://cache.netne.net/images/ic_add_circle_black_24dp.png","http://cache.netne.net/images/ic_content_paste_black_24dp.png","http://cache.netne.net/images/ic_report_black_24dp.png","http://cache.netne.net/images/ic_save_black_24dp.png","http://cache.netne.net/images/ic_send_black_24dp.png","http://cache.netne.net/images/ic_weekend_black_24dp.png","http://cache.netne.net/images/ic_add_circle_black_24dp.png","http://cache.netne.net/images/ic_add_circle_black_24dp.png","http://cache.netne.net/images/ic_add_circle_black_24dp.png","http://cache.netne.net/images/ic_add_circle_black_24dp.png"};
 
         for (int i = 0; i < titles.length && i < images.length; i++){
 
