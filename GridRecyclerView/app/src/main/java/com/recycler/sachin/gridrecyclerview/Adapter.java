@@ -16,6 +16,7 @@ import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,16 +57,24 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         holder.textView.setText(myData.title);
         //holder.imageView.setImageResource(myData.id);
 
-        OkHttpClient okHttpClient = new OkHttpClient();
+        /*OkHttpClient okHttpClient = new OkHttpClient();
         File customCacheDirectory = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/MyCache");
         okHttpClient.setCache(new Cache(customCacheDirectory, Integer.MAX_VALUE));
         OkHttpDownloader okHttpDownloader = new OkHttpDownloader(okHttpClient);
-        Picasso picasso = new Picasso.Builder(context).downloader(okHttpDownloader).build();
+        Picasso picasso = new Picasso.Builder(context).downloader(okHttpDownloader).build();*/
         //picasso.load(imageURL).into(viewHolder.image);
 
-        picasso.with(context)
+        Picasso mBuilder = new Picasso.Builder(context)
+                .loggingEnabled(BuildConfig.DEBUG)
+                .indicatorsEnabled(BuildConfig.DEBUG)
+                .downloader(new OkHttpDownloader(context, 30000))
+                .build();
+
+        mBuilder.load(myData.id).into(holder.imageView);
+
+        /*Picasso.with(context)
                 .load(myData.id)
-                .into(holder.imageView);
+                .into(holder.imageView);*/
     }
 
 
