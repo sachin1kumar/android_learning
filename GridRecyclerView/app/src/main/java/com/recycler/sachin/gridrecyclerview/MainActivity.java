@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycle);
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         recyclerView.setAdapter(new Adapter(this,getData()));
+
+
+
     }
 
     public static List<GetterSetter> getData(){

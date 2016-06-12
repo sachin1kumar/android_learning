@@ -1,7 +1,13 @@
 package com.recycler.sachin.gridrecyclerview;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,25 +62,52 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
         GetterSetter myData = data.get(position);
         holder.textView.setText(myData.title);
         //holder.imageView.setImageResource(myData.id);
-
-        /*OkHttpClient okHttpClient = new OkHttpClient();
-        File customCacheDirectory = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + "/MyCache");
+        File customCacheDirectory = null;
+        OkHttpClient okHttpClient = new OkHttpClient();
+        if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+            if(PackageManager.PERMISSION_GRANTED== ActivityCompat.checkSelfPermission(context, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+             customCacheDirectory = new File(Environment.getExternalStorageDirectory(), "PicassoIM");
+             if (!customCacheDirectory.exists())
+                 customCacheDirectory.mkdirs();
+            }
+            else
+                requestPermission(context);
+        }
         okHttpClient.setCache(new Cache(customCacheDirectory, Integer.MAX_VALUE));
         OkHttpDownloader okHttpDownloader = new OkHttpDownloader(okHttpClient);
-        Picasso picasso = new Picasso.Builder(context).downloader(okHttpDownloader).build();*/
-        //picasso.load(imageURL).into(viewHolder.image);
-
-        Picasso mBuilder = new Picasso.Builder(context)
-                .loggingEnabled(BuildConfig.DEBUG)
-                .indicatorsEnabled(BuildConfig.DEBUG)
-                .downloader(new OkHttpDownloader(context, 30000))
-                .build();
-
-        mBuilder.load(myData.id).into(holder.imageView);
+        Picasso picasso = new Picasso.Builder(context).downloader(okHttpDownloader).build();
+         picasso.load(myData.id).into(holder.imageView);
 
         /*Picasso.with(context)
                 .load(myData.id)
                 .into(holder.imageView);*/
+    }
+
+    private  void requestPermission(final Context context){
+
+        final int REQUEST_WRITE_EXTERNAL_STORAGE=1;
+        if(ActivityCompat.shouldShowRequestPermissionRationale((Activity)context,Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            // Provide an additional rationale to the user if the permission was not granted
+            // and the user would benefit from additional context for the use of the permission.
+            // For example if the user has previously denied the permission.
+
+            new AlertDialog.Builder(context)
+                    .setMessage("Allow write permission")
+                    .setPositiveButton("Allow now", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ActivityCompat.requestPermissions((Activity) context,
+                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                    REQUEST_WRITE_EXTERNAL_STORAGE);
+                        }
+                    }).show();
+
+        }else {
+            // permission has not been granted yet. Request it directly.
+            ActivityCompat.requestPermissions((Activity)context,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_WRITE_EXTERNAL_STORAGE);
+        }
     }
 
 
